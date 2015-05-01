@@ -31,7 +31,7 @@ public class HillClimber {
     public Trader getBestTrader(){
         fitnessRecords.add(currentTrader.getFitness());
 
-        while(useFistBestNeighbour(1,1) != null){}
+        while(useFistBestNeighbour(2,2) != null){}
 
         return currentTrader;
     }

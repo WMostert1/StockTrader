@@ -8,6 +8,7 @@ public class Trader {
     private int shares;
     private char [] choices;
     private Renko renkoData;
+    public double fitness;
 
     int n;
 
@@ -20,6 +21,7 @@ public class Trader {
             choices[i] = getRandomChoice();
         }
         renkoData = r;
+        fitness = -1.0;
     }
 
     public Trader(double funds,int n, Renko r){
@@ -31,6 +33,7 @@ public class Trader {
             choices[i] = getRandomChoice();
         }
         renkoData = r;
+        fitness = -1.0;
     }
 
     public Trader(char [] choices, Renko r){
@@ -39,6 +42,7 @@ public class Trader {
         n = 5;
         this.choices = choices;
         renkoData = r;
+        fitness = -1.0;
     }
 
     public Trader(double funds,int n,char [] choices, Renko r){
@@ -47,6 +51,7 @@ public class Trader {
         this.n = n;
         this.choices = choices;
         renkoData = r;
+        fitness = -1.0;
     }
 
     private char getRandomChoice(){
@@ -126,13 +131,15 @@ public class Trader {
             feeTotal = STT + brokerageFee + STRATE_TAX + IPL + VAT;
 
             if(tradeAmount + feeTotal > funds) numShares--;
+            if(numShares == 0) return;
 
         }while(tradeAmount + feeTotal > funds);
 
-        double total = feeTotal + tradeAmount;
+        double total = Math.round((feeTotal + tradeAmount)*100.0)/100.0;
 
         shares += numShares;
         funds -= total;
+
 
     }
 
@@ -154,17 +161,29 @@ public class Trader {
 
             double feeTotal = brokerageFee + STRATE_TAX + IPL + VAT;
 
-            double total = tradeAmount - feeTotal;
+            double total = Math.round((tradeAmount - feeTotal)*100.0)/100.0;
+
 
             shares -= numShares;
+
+
+
             funds += total;
+
         }
     }
 
     public double getFitness(){
-        run();
-        double fitness = funds + (shares * renkoData.stockData[renkoData.stockData.length-1].closingPrice);
-        resetTrader();
+        if(fitness == -1.0) {
+            run();
+            double fitness = Math.round((funds + (shares * renkoData.stockData[renkoData.stockData.length - 1].closingPrice)) * 100.0) / 100.0;
+
+            if (fitness < 0) {
+                boolean t = true;
+            }
+            resetTrader();
+            this.fitness = fitness;
+        }
         return fitness;
     }
 
@@ -179,7 +198,11 @@ public class Trader {
 
     public void setGenotype(char [] geno){
         choices = geno;
+        fitness = -1.0;
     }
 
+    public Renko getRenkoData(){
+        return renkoData;
+    }
 
 }

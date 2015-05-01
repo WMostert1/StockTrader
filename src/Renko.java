@@ -42,7 +42,7 @@ public class Renko {
             }
         }
 
-        boxSize = (maxClosingPrice-minClosingPrice)*0.01;
+        boxSize = Math.round(((maxClosingPrice-minClosingPrice)*0.01)*100.0)/100.0;
 
         blocks.add(new RenkoBlock(true,stockData[0]));
 
