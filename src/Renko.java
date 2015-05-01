@@ -44,15 +44,31 @@ public class Renko {
 
         boxSize = Math.round(((maxClosingPrice-minClosingPrice)*0.01)*100.0)/100.0;
 
-        blocks.add(new RenkoBlock(true,stockData[0]));
+       // blocks.add(new RenkoBlock(true,stockData[0]));
 
         //Building the renko blocks
+        double balance = stockData[0].closingPrice;
         for(int i = 1; i < data.length; i++){
-            if(stockData[i].closingPrice >= blocks.get(blocks.size()-1).dataUnit.closingPrice + boxSize)
-                blocks.add(new RenkoBlock(true,stockData[i]));
-            else if (stockData[i].closingPrice <= blocks.get(blocks.size()-1).dataUnit.closingPrice - boxSize)
-                blocks.add(new RenkoBlock(false,stockData[i]));
+            if(stockData[i].closingPrice >= balance + boxSize) {
+                balance += boxSize;
+                blocks.add(new RenkoBlock(false, stockData[i]));
+            }
+            else if (stockData[i].closingPrice <= balance - boxSize) {
+                balance -= boxSize;
+                blocks.add(new RenkoBlock(true, stockData[i]));
+            }
         }
 
+    }
+
+    public String getStringRepresentation(){
+        String output = "";
+        for(RenkoBlock r : blocks){
+            if(r.type == false)
+                output+= "0";
+            else
+                output += "1";
+        }
+        return output;
     }
 }

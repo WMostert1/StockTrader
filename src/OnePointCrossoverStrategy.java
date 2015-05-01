@@ -48,19 +48,19 @@ public class OnePointCrossoverStrategy extends CrossoverStrategy {
                 chromosome2[i] = tempGene;
             }
 
-            System.out.println("Crossover result:");
+          //  System.out.println("Crossover result:");
 
 
 
 
             Renko renkoData = parents[0].getRenkoData();
             Trader child1 = new Trader(chromosome1,renkoData);
-            System.out.println(Arrays.toString(chromosome1));
-            System.out.println(child1.getFitness());
+          //  System.out.println(Arrays.toString(chromosome1));
+          //  System.out.println(child1.getFitness());
             result.add(child1);
             Trader child2 = new Trader(chromosome2,renkoData);
-            System.out.println(Arrays.toString(chromosome2));
-            System.out.println(child2.getFitness());
+          //  System.out.println(Arrays.toString(chromosome2));
+         //   System.out.println(child2.getFitness());
             result.add(child2);
             return result;
         }

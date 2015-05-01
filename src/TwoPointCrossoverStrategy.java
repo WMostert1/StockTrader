@@ -31,16 +31,21 @@ public class TwoPointCrossoverStrategy extends CrossoverStrategy{
 
         Random r = new Random();
 
-        int third = size/3;
+        int skip = r.nextInt(3);
+        int third = chromosome1.length/3;
         int startPoint = 0;
-        for(int k = 0; k < 2; k++) {
-            for (int i = startPoint; i < third; i++) {
+        int endPoint = third;
+        for(int k = 0; k < 3; k++) {
+            if(k == 2)
+                endPoint = chromosome1.length;
+            if(k == skip) continue;
+            for (int i = startPoint; i < endPoint; i++) {
                 char tempGene = chromosome1[i];
                 chromosome1[i] = chromosome2[i];
                 chromosome2[i] = tempGene;
             }
-            startPoint = third;
-            third += third;
+            startPoint = endPoint;
+            endPoint += third;
         }
 
         Renko renkoData = parents[0].getRenkoData();

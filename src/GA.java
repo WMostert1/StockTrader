@@ -7,6 +7,7 @@ import java.util.Arrays;
  */
 public class GA {
     private Renko renkoData;
+    public double [] generationAverageFitness;
     private ElitismStrategy elitismStrategy;
     private int popSize;
     private int maxGen;
@@ -22,6 +23,7 @@ public class GA {
         crossoverStrategy = crossover;
         this.renkoData = renkoData;
         maxGen = maxGenerations;
+        generationAverageFitness = new double [maxGenerations];
         P0 = new Trader[popSize];
         for(int i = 0; i < populationSize;i++)
             P0[i] = new Trader(this.renkoData);
@@ -46,12 +48,17 @@ public class GA {
             }
         //track-progress-end
 
+            double averageFitnessForPop = 0.0;
             Trader bestTrader = population.get(0);
             for(Trader trader : population){
-                trader.getFitness();
+                averageFitnessForPop += trader.getFitness();
                 if(trader.getFitness() > bestTrader.getFitness())
                     bestTrader = trader;
             }
+
+            averageFitnessForPop = Math.round((averageFitnessForPop/popSize)*100.0)/100.0;
+            generationAverageFitness[generationNum] = averageFitnessForPop;
+
 
             bestTraders.add(bestTrader);
 
