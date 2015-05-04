@@ -4,7 +4,18 @@ import java.util.Random;
 /**
  * Created by wernermostert on 2015/04/30.
  */
+
+/**
+ * Fitness Proportional selection chooses a Trader in the population, making a Trader more likely to be selected
+ * based on its actual fitness value in comparison with other Trader in the population.
+ */
 public class FitnessProportionalSelectionStrategy implements SelectionStrategy {
+    /**
+     * Selects a Trader from the population using the Fitness Proportional (or Roulette Wheel) algorithm.
+     * @param population    A collection of traders
+     * @param populationFitness A collection of fitnesses of the population
+     * @return A selected Trader
+     */
     @Override
     public Trader select(ArrayList<Trader> population, double[] populationFitness) {
         double totalFitness = 0.0;

@@ -4,7 +4,18 @@ import java.util.Random;
 /**
  * Created by wernermostert on 2015/04/30.
  */
+
+/**
+ * The Rank Based selection strategy allows a more fit Trader to be more likely to be selected
+ * based on its rank in the population according to its fitness value.
+ */
 public class RankBasedSelectionStrategy implements  SelectionStrategy {
+    /**
+     * Finds a Trader in the population according to the Rank Based Selection algorithm
+     * @param population    A collection of traders
+     * @param populationFitness A collection of the traders' fitness
+     * @return A trader selected using the algorithm
+     */
     @Override
     public Trader select(ArrayList<Trader> population, double[] populationFitness) {
         int size = populationFitness.length;
@@ -13,6 +24,8 @@ public class RankBasedSelectionStrategy implements  SelectionStrategy {
         for(int i = 0; i < size;i++)
             populationArr[i] = population.get(i);
 
+
+        //Do some sorting of the original population
         for(int i = 0; i < size-1; i++){
             for(int j = i+1; j < size; j++){
                 if(populationFitness[j] < populationFitness[i]){
@@ -34,7 +47,6 @@ public class RankBasedSelectionStrategy implements  SelectionStrategy {
             relativeWeights[i] = (i+1.0)/(size+1.0);
             totalRelativeWeights += relativeWeights[i];
         }
-
 
 
         double [] cumulativeRelativeWeights = new double[size];

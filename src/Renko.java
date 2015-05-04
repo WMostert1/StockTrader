@@ -11,7 +11,6 @@ import java.util.ArrayList;
  */
 public class Renko {
     public final StockDayUnit [] stockData;
-    private final double boxSize;
     public final ArrayList<RenkoBlock> blocks;
 
     /**
@@ -21,14 +20,16 @@ public class Renko {
     public Renko(String[] data){
         blocks = new ArrayList<RenkoBlock>();
         stockData = new StockDayUnit[data.length];
-
+        double boxSize;
         double maxClosingPrice = 0.0;
         double minClosingPrice = 0.0;
 
         for(int i =0; i < data.length; i ++){
             String [] parts = data[i].split("\t");
+
             //Populate stockData
-            stockData[i] = new StockDayUnit(parts[0],new Integer(parts[1]),new Integer(parts[3]),new Integer(parts[2]));
+
+                stockData[i] = new StockDayUnit(parts[0], new Integer(parts[1]), new Integer(parts[3]), new Integer(parts[2]));
 
             //Determine maximum and minimum closing prices
             if(i == 0){
@@ -43,8 +44,6 @@ public class Renko {
         }
 
         boxSize = Math.round(((maxClosingPrice-minClosingPrice)*0.01)*100.0)/100.0;
-
-       // blocks.add(new RenkoBlock(true,stockData[0]));
 
         //Building the renko blocks
         double balance = stockData[0].closingPrice;
@@ -61,10 +60,14 @@ public class Renko {
 
     }
 
+    /**
+     * Converts the Renko object's Renko blocks to a string representation of solid and open blocks.
+     * @return A binary string representation of the renko blocks.
+     */
     public String getStringRepresentation(){
         String output = "";
         for(RenkoBlock r : blocks){
-            if(r.type == false)
+            if(!r.type)
                 output+= "0";
             else
                 output += "1";

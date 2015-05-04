@@ -4,6 +4,11 @@ import java.util.Random;
 /**
  * Created by wernermostert on 2015/04/30.
  */
+
+/**
+ * Tournament selection selects a random amount of individuals from the population
+ * and then chooses the best Trader from the sub-group of the population
+ */
 public class TournamentSelectionStrategy implements SelectionStrategy {
     private int tSize;
     public TournamentSelectionStrategy(int tournament_size){

@@ -39,7 +39,7 @@ public class HillClimber {
     /**
      * This is the neighbourhood function to determine a better neighbouring solution. Each element
      * of the trader's choices are permuted within the intervals specified by the parameters as below.
-     * In the case of overPasses = 1 and innerPasses = 1, a full permutation should be done.
+     * In the case of overPasses = 1 and innerPasses = 1, a full permutation should be done. Her name is SORFFLE.
      * @param overPasses    The interval in which choices are changed during the outer iteration
      * @param innerPasses   The interval in which choices are changed during the inner iteration
      * @return

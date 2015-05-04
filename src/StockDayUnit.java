@@ -17,11 +17,11 @@ public class StockDayUnit {
     public double highPrice;
 
     /**
-     *
-     * @param date          Date of day
-     * @param closingPrice  Closing price of stock for the day
-     * @param lowPrice      Lowest price of stock during the day
-     * @param highPrice     Highest price of stock during the day
+     * Constructor to initialise values
+     * @param date          Date of the trading day
+     * @param closingPrice  Closing price of stock for the trading day
+     * @param lowPrice      Lowest price of stock during the trading day
+     * @param highPrice     Highest price of stock during the trading day
      */
     public StockDayUnit(String date, int closingPrice, int lowPrice, int highPrice){
 

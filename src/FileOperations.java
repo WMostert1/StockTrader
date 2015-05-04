@@ -8,20 +8,30 @@ import java.io.*;
  * This is a simple utility library for file operations.
  */
 public class FileOperations {
+    /**
+     * Reads a text file
+     * @param filename The name of the file
+     * @return The contents of the file
+     * @throws FileNotFoundException The file does not exist
+     * @throws IOException An IO error occured
+     */
     public static String readFile(String filename) throws FileNotFoundException, IOException
     {
-        String content = null;
-        File file = new File(filename);
-
-            FileReader reader = new FileReader(file);
-            char[] chars = new char[(int) file.length()];
-            reader.read(chars);
-            content = new String(chars);
-            reader.close();
+        String content = "";
+        BufferedReader reader = new BufferedReader(new FileReader(filename));
+        String line;
+        while ((line = reader.readLine()) != null)
+            if(!line.equals(""))
+            content += line+"\r\n";
 
         return content;
     }
 
+    /**
+     * Writes content to a file.
+     * @param content String representation of file content to be written
+     * @param filename Name of the file to which is to be written
+     */
     public static void writeToFile(String content, String filename){
         FileWriter fw= null;
         File file =null;

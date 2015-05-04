@@ -6,9 +6,14 @@
  * RenkoBlock represents a block on a Renko Graph
  */
 public class RenkoBlock{
-    public boolean type; // False -> Downwards Solid Block    True -> Upwards Open Block
+    public boolean type;
     public StockDayUnit dataUnit;
 
+    /**
+     * Constructor for initialisation
+     * @param type  A solid or open block
+     * @param dataUnit Container for information related to a trading day
+     */
     public RenkoBlock(boolean type,StockDayUnit dataUnit){
         this.type = type;
         this.dataUnit = dataUnit;

@@ -1,0 +1,1 @@
+[H, B, H, S, H, H, B, H, H, H, S, S, B, H, H, B, B, H, S, S, S, S, B, S, H, S, H, B, B, B, B, H]
